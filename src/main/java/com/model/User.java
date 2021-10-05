@@ -2,9 +2,13 @@ package com.model;
 
 import java.util.List;
 
-public class User {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-	private String username;
+@Entity
+public class User {
+	@Id
+	private String username; //this will be the primary key
 	private String password;
 	private String imgURL;
 	private List<String> favorites;

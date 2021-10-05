@@ -1,7 +1,12 @@
 package com.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class WeatherForecast {
-	private String city;
+	@Id
+	private String city; //this will be the primary key
 	private double temp;
 	private String description;
 

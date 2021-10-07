@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
 			List<String> newfavs = u.get().getFavorites();
 			newfavs.add(city);
 			u.get().setFavorites(newfavs);
-			userdao.deleteById(username); //necessary? not sure if it will update automatically or not
+			userdao.deleteById(username); 
 			userdao.save(u.get());
 			return true;
 		}
@@ -54,9 +54,8 @@ public class UserServiceImpl implements UserService{
 			List<String> favs = u.get().getFavorites();
 			return favs;
 		}
-		List<String> l = new ArrayList<>();
-		l.add("User not found"); //can change this if possible but thought it would work here
-		return l;
+	
+		return null;
 	}
 
 }

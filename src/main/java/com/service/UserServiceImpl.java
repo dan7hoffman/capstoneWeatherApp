@@ -17,8 +17,15 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public boolean registerUser(User user) {
-		userdao.save(user);
-		return true;
+		Optional<User> u = userdao.findById(user.getUsername());
+		if(u.isPresent()) {
+			return false;
+		}
+		else{
+			userdao.save(user);
+			return true;
+		}
+		
 	}
 
 	@Override

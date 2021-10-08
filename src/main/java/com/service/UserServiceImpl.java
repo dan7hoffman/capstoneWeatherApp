@@ -7,13 +7,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dao.FavoritesDAO;
 import com.dao.UserDAO;
+import com.model.Favorites;
 import com.model.User;
+import com.model.WeatherForecast;
 @Service
 public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserDAO userdao;
+	
+	@Autowired
+	private FavoritesDAO favdao;
 	
 	@Override
 	public boolean registerUser(User user) {
@@ -44,24 +50,42 @@ public class UserServiceImpl implements UserService{
 	public boolean addFavorite(String username, String city) {
 		Optional<User> u = userdao.findById(username);
 		if(u.isPresent()) {
-			List<String> newfavs = u.get().getFavorites();
-			newfavs.add(city);
-			u.get().setFavorites(newfavs);
-			userdao.deleteById(username); 
-			userdao.save(u.get());
+			Favorites newFav = new Favorites(username, city);
+			favdao.save(newFav);
 			return true;
 		}
 		return false;
 	}
-
+	
+	
 	@Override
-	public List<String> showFavorites(String username) { //I also changed this to have it return the favorites instead of a boolean
+	public List<String> showFavoritesbyUser(String username) { 
+		List<String> userFavs = new ArrayList<>();
 		Optional<User> u = userdao.findById(username);
 		if(u.isPresent()) {
-			List<String> favs = u.get().getFavorites();
-			return favs;
+			
+			Iterable<Favorites> allfavs = favdao.findAll();
+			for(Favorites f: allfavs) {
+				if(f.getUsername().equals(username)) {
+					userFavs.add(f.getCity());
+				}
+			}
+			return userFavs;
 		}
 	
+		return null;
+	}
+	
+
+	@Override
+	public WeatherForecast getWeatherbyCity(String city) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<WeatherForecast> getWeatherbyFavorites(List<String> cities) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

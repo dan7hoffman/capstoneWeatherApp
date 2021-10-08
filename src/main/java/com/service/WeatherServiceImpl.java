@@ -2,10 +2,8 @@ package com.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.model.WeatherForecast;
-@Service
+
 public class WeatherServiceImpl implements WeatherService{
 
 	@Override
@@ -19,5 +17,4 @@ public class WeatherServiceImpl implements WeatherService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

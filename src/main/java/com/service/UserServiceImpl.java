@@ -11,7 +11,7 @@ import com.dao.FavoritesDAO;
 import com.dao.UserDAO;
 import com.model.Favorites;
 import com.model.User;
-import com.model.WeatherForecast;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -75,18 +75,13 @@ public class UserServiceImpl implements UserService{
 	
 		return null;
 	}
+
+	@Override
+	public List<User> getAllUsers() {
+		Iterable<User> allusers = userdao.findAll();
+		return (List<User>) allusers;
+		
+	}
 	
-
-	@Override
-	public WeatherForecast getWeatherbyCity(String city) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<WeatherForecast> getWeatherbyFavorites(List<String> cities) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

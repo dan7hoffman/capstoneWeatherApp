@@ -17,7 +17,7 @@ import com.model.User;
 import com.service.UserService;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200") //to connect to Angular
+@CrossOrigin(origins = "http://localhost:4200") //to connect to Angular
 @RequestMapping("/mainapp") //maybe we can put the initial buttons on this page (Register or Login)
 public class AppController {
 	
@@ -38,6 +38,11 @@ public class AppController {
 			return "login successful";
 		}
 		return "login not successful, user could not be found in system";
+	}
+	
+	@GetMapping("/allusers")
+	public List<User> getAllUsers() {
+		return uservice.getAllUsers();
 	}
 	
 	@GetMapping("/{username}/getfavorites")
